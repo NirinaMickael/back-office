@@ -25,7 +25,7 @@
             <mat-error *ngIf="UserEditForm.get('email').invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
         <div class="w-100 my-2" >
-            <button [disabled]="(isSaving$ | async) || invalid" mat-raised-button color="primary" style="float: right">
+            <button [disabled]="(isSaving$ | async) || invalid" mat-raised-button color="warn" style="float: right">
                 Insert
                 <mat-spinner *ngIf="isSaving$ | async" diameter="20" class="float-right m-2">
                 </mat-spinner>
