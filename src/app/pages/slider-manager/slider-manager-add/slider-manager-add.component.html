@@ -1,0 +1,17 @@
+<div style="width: 400px">
+  <h1>Add a slider</h1>
+  <form [formGroup]="SliderAddForm">
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" />
+      <!-- <mat-error *ngIf="TextAddForm.get('title').invalid"></mat-error> -->
+    </mat-form-field>
+    <br />
+    <app-upload-file
+      (uploadEvent)="onSubmit($event)"
+      [fileTypes]="'image'"
+      [allowMultipleUpload]="true"
+    >
+    </app-upload-file>
+  </form>
+</div>

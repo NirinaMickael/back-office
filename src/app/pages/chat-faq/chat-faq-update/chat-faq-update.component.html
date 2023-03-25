@@ -1,0 +1,38 @@
+<h1>Update FaQ</h1>
+<form  [formGroup]="ChatFaqForm" (ngSubmit)="onSubmit()">
+  <div class="d-flex flex-column">
+    <mat-form-field appearance="outline" class="mat-form-field-fill">
+      <mat-label>Question</mat-label>
+      <textarea rows=2 matInput formControlName="question"></textarea>
+      <mat-error
+        *ngIf="
+          ChatFaqForm.get('question').touched &&
+          ChatFaqForm.get('question').hasError('required')
+        "
+      >
+        Please enter Question
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+    <mat-form-field appearance="outline" class="mat-form-field-fill">
+      <mat-label>Answer</mat-label>
+      <textarea rows=5 matInput formControlName="answer"></textarea>
+      <mat-error
+        *ngIf="
+          ChatFaqForm.get('answer').touched &&
+          ChatFaqForm.get('answer').hasError('required')
+        "
+      >
+        Please enter Answer
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button [disabled]="saving$ | async" class="w-100" mat-raised-button color="primary">
+    <span class="btn-add-text" *ngIf="!(saving$ | async)">Update faq</span>
+    <mat-spinner color="primary" *ngIf="saving$ | async" diameter="20">
+    </mat-spinner>
+  </button>
+
+</form>

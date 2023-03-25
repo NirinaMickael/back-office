@@ -1,0 +1,36 @@
+@import "../../../assets/css/variables.scss";
+@mixin menu {
+  background-color: $blackOpacity;
+  color: $black;
+  padding: 0.7em 0.7em;
+  border-radius: 5px;
+  .submenu-icon {
+    color: $black !important;
+  }
+}
+
+.side-navigation {
+  display: flex;
+  flex-direction: column;
+  .nav-link {
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.7em 0.7em;
+    color: $black;
+    outline: none;
+    transition: none;
+    margin: 2px 6px;
+    &:hover {
+      @include menu;
+    }
+  }
+  .active-link {
+    @include menu;
+  }
+
+  width: 250px;
+  background-color: $white !important;
+  border-radius: 4px;
+}

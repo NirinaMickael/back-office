@@ -1,0 +1,26 @@
+// Define the snackbar class
+@mixin snackbar($name, $backgroundColor, $color) {
+    .snackbar-#{$name} {
+        background-color: #{$backgroundColor} !important;
+        color: #{$color} !important
+    }
+}
+
+// Close snackbar button
+@mixin closesnackbarbutton {
+    .close-snack-button {
+        background: none;
+        border: none;
+        transition: .5s;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+// Table width
+@mixin table100 {
+    table {
+        width: 100% !important;
+    }
+}

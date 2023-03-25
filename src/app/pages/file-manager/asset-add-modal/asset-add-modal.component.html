@@ -1,0 +1,99 @@
+<div style="width: 60vw; max-height: 90vh; overflow-x: hidden;">
+    <h1>Add an asset</h1>
+    <p>* : required</p>
+    <p style="display: flex; align-content: center;">
+        <mat-icon class="me-3 submenu-icon">info</mat-icon>file size must be less than 150MB
+    </p>
+    <nav mat-tab-nav-bar [backgroundColor]="background">
+        <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link; resetAllForm();"
+            [active]="activeLink == link"> {{link}}
+        </a>
+    </nav>
+    <br>
+
+    <form [formGroup]="AssetAddForm">
+        <div style="display: flex; justify-content: space-between;" *ngIf="activeLink == 'Auditorium'">
+
+            <!-- <mat-form-field appearance="fill" class="mat-form-field-fill" style="margin-right: 1em;">
+                <mat-label>File type*: </mat-label>
+                <mat-select formControlName="fileType">
+                    <mat-option *ngFor="let item of filetypes" [value]="item">
+                        {{item}}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="AssetAddForm.get('fileType').touched && AssetAddForm.get('fileType').hasError('required')">
+                    Please select a type
+                </mat-error>
+            </mat-form-field> -->
+            <input type="text" value="video" formControlName="fileType" readonly hidden>
+
+            <mat-form-field appearance="fill" class="mat-form-field-fill" style="margin-right: 1em;">
+                <mat-label>Auditorium Number: </mat-label>
+                <input matInput formControlName="auditoriumNum" (keyup)="changeFilename()" />
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="fill" class="mat-form-field-fill"
+                [style.visibility]="AssetAddForm.get('auditoriumNum').value ? 'visible' : 'hidden'">
+                <mat-label>Rank: </mat-label>
+                <input matInput formControlName="rank" />
+            </mat-form-field> -->
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between;" *ngIf="activeLink == 'Hall'">
+
+            <input type="text" value="video" formControlName="fileType" readonly hidden>
+
+            <div>
+                <mat-form-field appearance="fill" class="mat-form-field-fill">
+                    <mat-label>Video location*: </mat-label>
+                    <mat-select formControlName="assetLocation" (selectionChange)="changeLocation()">
+                        <mat-option *ngFor="let item of assetsHall" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="mat-form-field-fill">
+                    <mat-label>Description: </mat-label>
+                    <input matInput formControlName="description" />
+                </mat-form-field>
+            </div>
+
+            <img src="assets/img/hall-videos-map-2.png" alt="" style="height: 12em;">
+        </div>
+
+        <mat-form-field appearance="fill" class="mat-form-field-fill" *ngIf="activeLink == 'Auditorium'">
+            <input type="text" value="video" formControlName="fileType" readonly hidden>
+            <mat-label>Description: </mat-label>
+            <input matInput formControlName="description" />
+        </mat-form-field>
+
+        <div style="position: relative;">
+            <!-- <div class="disable-upload"
+                [style.display]="(AssetAddForm.get('fileType').invalid && activeLink == 'Auditorium') || (AssetAddForm.get('assetLocation').invalid && activeLink == 'Hall') ? 'block' : 'none' ">
+            </div> -->
+
+            <!-- <mat-slide-toggle (change)="useLink = $event.checked">Use External Link</mat-slide-toggle>
+            <br>
+            <div *ngIf="useLink">
+                <mat-form-field appearance="fill" class="mat-form-field-fill">
+                    <mat-label>Url: </mat-label>
+                    <input matInput [(ngModel)]="fileUrl" [ngModelOptions]="{standalone: true}" />
+                </mat-form-field>
+
+                <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(fileUrl)" frameborder="0" style="height: 12em;"></iframe>
+                <app-default-button [text]="'Confirm'" (clicked)="onSubmit($event)"
+                    [style.cursor]="(isSaving$ | async) ? 'not-allowed' : 'pointer' "></app-default-button>
+            </div> -->
+
+            <app-upload-file (uploadEvent)="onSubmit($event)"
+                [filename]="activeLink == 'Hall' ? fileName : (activeLink == 'Auditorium' ? auditFilename : activeLink.toLowerCase())"
+                [fileTypes]="activeLink == 'Hall' ? 'video' : AssetAddForm.get('fileType').value">
+            </app-upload-file>
+        </div>
+
+        <br />
+        <br />
+    </form>
+</div>

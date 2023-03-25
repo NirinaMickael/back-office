@@ -1,0 +1,64 @@
+<div style="width: 400px">
+    <div class="d-flex align-items-center">
+        <h1 class="m-1">Edit Timer</h1>
+        <mat-spinner class="ms-2" color="primary" *ngIf="loading$ | async" diameter="20"></mat-spinner>
+    </div>
+    <form [formGroup]="TextAddForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="fill" class="mat-form-field-fill">
+            <mat-label>Page*: </mat-label>
+            <input
+              type="text"
+              placeholder="Page"
+              aria-label="Page"
+              matInput
+              formControlName="page"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let item of pages" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-autocomplete>
+      
+            <mat-error
+              *ngIf="
+                TextAddForm.get('page').touched &&
+                TextAddForm.get('page').hasError('required')
+              "
+            >
+              Please select a page
+            </mat-error>
+          </mat-form-field>
+
+        <br />
+        <br />
+        <div style="display: flex; justify-content: space-between;">
+            <mat-form-field appearance="fill" style="margin-right: 1em;">
+                <mat-label>minute</mat-label>
+                <input matInput formControlName="minute" type="number" min="0" max="59" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>second</mat-label>
+                <input matInput formControlName="second" type="number" min="0" max="59" />
+            </mat-form-field>
+
+        </div>
+        <br />
+        <br />
+
+        <div style="display: flex; justify-content: space-between;" *ngIf = "isIntro">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Time before transition (in seconds)</mat-label>
+                <input matInput formControlName="timeBeforeTransition" type="number" min="0" max="15" />
+            </mat-form-field>
+
+        </div>
+        <button [disabled]="(isSaving$ | async) || invalid" mat-raised-button color="primary" style="float: right">
+            Confirm
+            <mat-spinner *ngIf="isSaving$ | async" diameter="20" class="float-right m-2">
+            </mat-spinner>
+        </button>
+    </form>
+</div>

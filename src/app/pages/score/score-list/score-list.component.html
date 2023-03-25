@@ -1,0 +1,18 @@
+<h1>Score list</h1>
+
+<mat-form-field class="search-input">
+    <mat-label>Search</mat-label>
+    <mat-icon matSuffix>search</mat-icon>
+    <input matInput (keyup)="updateFilter($event)" placeholder="Ex. Mia">
+</mat-form-field>
+
+<div class="table-container mat-elevation-z8">
+    <ngx-datatable #table class="material striped" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [limit]="10" rowHeight="auto" [columnMode]="'force'">
+        <ngx-datatable-column name="User" prop="user"></ngx-datatable-column>
+        <ngx-datatable-column name="Game 1" prop="game_1.score"></ngx-datatable-column>
+        <ngx-datatable-column name="Game 2" prop="game_2.score"></ngx-datatable-column>
+        <ngx-datatable-column name="Game 3" prop="game_3.score"></ngx-datatable-column>
+        <ngx-datatable-column name="Game 4" prop="game_4.score"></ngx-datatable-column>
+        <ngx-datatable-column name="Total" prop="total"></ngx-datatable-column>
+    </ngx-datatable>
+</div>

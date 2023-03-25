@@ -1,0 +1,28 @@
+$black: #231f20;
+$white: #fff;
+
+.leaderboard-panel{
+    background-color: $white;
+
+    .inside {
+        color: $black;
+        display: flex;
+        h1 {
+            margin-top: .5em;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            padding: 1% 0%;
+            width: 100%;
+        }
+    }
+
+    .leaderboard-thead-dark {
+        background-color: $black;
+        color: $white;
+    }
+    
+    .leaderboard-tbody {
+        background-color: $white;
+        color: $black;
+    }
+}

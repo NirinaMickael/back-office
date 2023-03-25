@@ -1,0 +1,12 @@
+<div class="side-navigation mt-3">
+  <a
+    *ngFor="let menu of menuList"
+    matRipple
+    class="nav-link"
+    [routerLink]="[menu.path]"
+    routerLinkActive="active-link"
+  >
+    <mat-icon class="me-3 submenu-icon">{{ menu.icon }}</mat-icon>
+    {{ menu.name }}
+</a>
+</div>

@@ -1,0 +1,20 @@
+<div class="leaderboard-panel">
+    <table class="table">
+        <thead class="leaderboard-thead-dark">
+            <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Candidate</th>
+                <th *ngIf="hideTime!=undefined && !hideTime" scope="col">Time (s)</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody class="leaderboard-tbody">
+            <tr *ngFor="let item of data; let i = index;">
+                <th scope="row" style="text-align: center;">{{ i+1 }}</th>
+                <td>{{ item.user }}</td>
+                <td *ngIf="hideTime!=undefined && !hideTime">{{ item.time }}</td>
+                <td>{{ item.score }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

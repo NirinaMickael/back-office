@@ -1,0 +1,71 @@
+.section-manager-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2em;
+}
+
+.delete-btn {
+    color: rgb(218, 59, 59);
+    cursor: pointer;
+}
+
+.card-section {
+
+    margin-bottom: 2em;
+
+    img {
+        width: 8em;
+        height: 8em;
+        object-fit: cover;
+    }
+
+    h2,
+    p,
+    li {
+        cursor: pointer;
+    }
+
+    .section-input {
+        background: transparent;
+        color: #333333;
+        outline: none;
+        border: none;
+        border-bottom: 0.05em solid #333333;
+        margin-bottom: 1em;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card-body {
+        display: flex;
+
+        div {
+            flex: 1 0 21%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li:hover {
+                color: #3f51b5;
+            }
+        }
+
+        p {
+            max-width: 10em;
+        }
+    }
+}
+
+.add-button {
+    display: flex;
+
+    button {
+        transform: scale(0.7);
+    }
+}

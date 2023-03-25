@@ -1,0 +1,14 @@
+<ul class="user-list px-0">
+  <p *ngIf="!userList?.length">Waiting for users...</p>
+  <li
+    [ngClass]="{ active: activeUser == user }"
+    class="user py-3 px-1"
+    *ngFor="let user of userList"
+    (click)="selectUser(user)"
+  >
+    <div class="d-flex justify-content-between">
+      <app-chat-user [user]="user"></app-chat-user>
+      <!-- <mat-icon *ngIf="isChatLocked(user)">lock</mat-icon> -->
+    </div>
+  </li>
+</ul>

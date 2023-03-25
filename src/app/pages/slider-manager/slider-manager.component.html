@@ -1,0 +1,53 @@
+<div class="d-flex align-items-center">
+  <h1 class="m-1">Slider Manager</h1>
+  <mat-spinner
+    class="ms-2"
+    color="primary"
+    *ngIf="saving$ | async"
+    diameter="20"
+  ></mat-spinner>
+  <button mat-raised-button color="primary" class="demo-button" (click)="add()">
+    Add Slider
+  </button>
+</div>
+
+<br />
+<div
+  class="table-container d-flex flex-column justify-content-between mat-elevation-z8"
+  style="background-color: lightgrey"
+>
+  <mat-card *ngFor="let element of sliders" style="margin-bottom: 1em">
+    <h2>{{ element.type }}</h2>
+    <div class="card-group">
+      <div class="card-inner-content">
+        <ng-container>
+          <app-card-checkable
+            *ngFor="let item of element.filenames"
+            class="card-element"
+            [imagesource]="serverPublicPath + '' + item.name"
+            (click)="check(item)"
+            [checked]="item.selected"
+          >
+          </app-card-checkable>
+        </ng-container>
+      </div>
+    </div>
+    <button
+      style="margin-right: 1%"
+      mat-raised-button
+      color="primary"
+      aria-label="edit"
+      (click)="deleteImages(element)"
+    >
+      Delete Image(s)
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      aria-label="delete"
+      (click)="delete(element)"
+    >
+      Delete
+    </button>
+  </mat-card>
+</div>

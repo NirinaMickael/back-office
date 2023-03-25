@@ -1,0 +1,19 @@
+@import "../../../../assets/css/variables.scss";
+.user-list {
+    height: 100%;
+    overflow: auto;
+    .user {
+        list-style: none;
+        border-bottom: 2px solid #8080803b;
+        padding-bottom: 15px;
+        transition: border-bottom .1s ease-in-out;
+        &:hover {
+            border-bottom: 2px solid $blueTheme;
+            cursor: pointer;
+        }
+    }
+
+    .user.active {
+        border-bottom: 2px solid $blueTheme;
+    }
+}

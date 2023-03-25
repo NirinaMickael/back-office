@@ -1,0 +1,87 @@
+<div class="card px-4">
+  <h1>Add a file</h1>
+  <p>* : required</p>
+  <p style="display: flex; align-content: center">
+    <mat-icon class="me-3 submenu-icon">info</mat-icon>file size must be less
+    than 600MB
+  </p>
+  <br />
+
+  <form [formGroup]="AssetAddForm">
+    <div style="display: flex; justify-content: space-between">
+      <input
+        type="text"
+        value="video"
+        formControlName="fileType"
+        readonly
+        hidden
+      />
+
+      <div>
+        <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+          <mat-label>Video location*: </mat-label>
+          <input
+            matInput
+            [(ngModel)]="videoModel.location"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+          <mat-label>Description: </mat-label>
+          <input
+            matInput
+            [(ngModel)]="videoModel.description"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div style="position: relative">
+      <mat-slide-toggle
+        (change)="useLink = $event.checked"
+        [(ngModel)]="useLink"
+        [ngModelOptions]="{ standalone: true }"
+        >Use External Link</mat-slide-toggle
+      >
+      <br />
+      <div *ngIf="useLink">
+        <mat-form-field appearance="fill" class="mat-form-field-fill">
+          <mat-label>Url: </mat-label>
+          <input
+            matInput
+            [(ngModel)]="videoModel.link"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+
+        <iframe
+          [src]="
+            videoModel?.link
+              ? sanitizer?.bypassSecurityTrustResourceUrl(videoModel.link)
+              : videoModel.link
+          "
+          frameborder="0"
+          style="height: 12em"
+        ></iframe>
+        <app-default-button
+          [text]="'Confirm'"
+          (clicked)="onSubmit($event)"
+          [style.cursor]="(isSaving$ | async) ? 'not-allowed' : 'pointer'"
+        ></app-default-button>
+      </div>
+
+      <app-upload-file
+        *ngIf="!useLink"
+        (uploadEvent)="onSubmit($event)"
+        [filename]="videoModel.location?.toLowerCase()"
+        [fileTypes]="'*'"
+      >
+      </app-upload-file>
+    </div>
+
+    <br />
+    <br />
+  </form>
+</div>

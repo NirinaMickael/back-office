@@ -1,0 +1,10 @@
+<!-- <div class="d-flex align-items-center justify-content-between" *ngIf="showSnackbar$ | async"> -->
+<div class="d-flex align-items-center justify-content-between">
+    <mat-icon>{{data.icon}}</mat-icon>
+    <span>{{data.message}}</span>
+    <div class="float-right">
+        <button mat-icon-button (click)="onCloseSnackbar()" class="close-snack-button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

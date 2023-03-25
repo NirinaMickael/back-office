@@ -1,0 +1,99 @@
+<div class="d-flex align-items-center">
+  <h1 class="m-1">{{ userLabel }}</h1>
+  <mat-spinner class="ms-2" color="primary" *ngIf="saving$ | async" diameter="20"></mat-spinner>
+</div>
+<div class="button-action-container">
+    <mat-form-field class="search-input">
+        <mat-label>Search</mat-label>
+        <mat-icon matSuffix>search</mat-icon>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+    <mat-form-field class="px-2 w-full">
+        <mat-label>Filter by</mat-label>
+        <mat-select (selectionChange)="onChangeCategory($event)">
+            <mat-option value="admin">Admin</mat-option>
+            <mat-option value="superAdmin">superAdmin</mat-option>
+            <mat-option value="visitor"></mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<button mat-raised-button color="primary" class="demo-button" (click)="addUser()">
+    Add user
+</button>
+
+<div class="table-container d-flex flex-column justify-content-between mat-elevation-z8">
+
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="avatar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
+                <ngx-avatar [name]="element.email" size="40"></ngx-avatar>
+            </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Profile </th>
+            <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="canChat" *ngIf="account?.role === 'superAdmin' " >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> chat admin </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle
+              *ngIf="element.role === 'admin' || element.role === 'superAdmin' || element.role=='artist'"
+              color="accennt"
+              [checked]="element.canChat"
+              (toggleChange)="updateAdminChatStatus(element)"
+            >
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let element">
+                <span class="badge rounded-pill" [ngClass]="{ 'bg-success': element.connected, 'bg-warning': !element.connected }">{{ element.connected ? "Online" : "Offline"  }}</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created on </th>
+            <td mat-cell *matCellDef="let element"> {{ element.createdAt | date | date:'MM/dd/y' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated on </th>
+            <td mat-cell *matCellDef="let element"> {{ element.updatedAt | date | date:'MM/dd/y' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" aria-label="edit" (click)="editUser(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" aria-label="delete" (click)="deleteObject(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="sticky-paginator" [pageSize]="10" [pageSizeOptions]="[10, 30, 50, 100]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,34 @@
+<div class="d-flex align-items-center mb-2">
+  <h1 class="my-0  me-2">Chat Faq</h1>
+  <mat-spinner color="primary" *ngIf="loading$ | async" diameter="20"></mat-spinner>
+</div>
+
+<div class="content px-2 d-flex flex-column">
+  <div class="d-flex justify-content-between align-items-center">
+    <mat-form-field class="search-input mx-0">
+      <mat-label>Search</mat-label>
+      <mat-icon matSuffix>search</mat-icon>
+      <input matInput [(ngModel)]="search" placeholder="Ex. how to chat" #input>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="add-button mb-1" (click)="openAddDialog()">
+      Add faq
+    </button>
+  </div>
+
+
+  <div class="faq-wrapper row ">
+
+
+      <div *ngFor="let faq of chatFaqs | filter:search">
+        <div *ngIf="!(loading$|async)" class="col-12">
+          <app-chat-faq-card
+            [faq]="faq"
+            (editEvent)="editChatFaq($event)"
+            (deleteEvent)="deleteChatFaq($event)">
+          </app-chat-faq-card>
+        </div>
+      </div>
+
+  </div>
+
+</div>

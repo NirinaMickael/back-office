@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon> menu </mat-icon>
+  </button>
+  <app-topbar style="width: 100%;"></app-topbar>
+</mat-toolbar>
+
+<mat-progress-bar
+  *ngIf="loading" color="primary" mode="indeterminate">
+</mat-progress-bar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <perfect-scrollbar style="max-height: 100vh">
+      <router-outlet></router-outlet>
+    </perfect-scrollbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

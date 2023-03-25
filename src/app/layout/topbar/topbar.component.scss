@@ -1,0 +1,23 @@
+.user-identity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-right: 5%;
+        margin-top: 6%;
+    }
+
+    .menu-user {
+        padding-top: 8px;
+
+        .arrow_down {
+            padding-top: 4px;
+        }
+    }
+}
+
+img.logo {
+    height: 70px;
+    width: auto;
+}

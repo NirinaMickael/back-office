@@ -1,0 +1,10 @@
+
+<div style="display: flex; justify-content: flex-end;">
+    <dropzone [config]="config" [message]="message" (error)="onUploadError($event)"
+    (success)="onUploadSuccess($event)"></dropzone>
+    <app-default-button *ngIf="!disableUploadIfNoFiles || (uploadedFiles && uploadedFiles.length && uploadedFiles[0])"
+        [text]="'upload'" (clicked)="upload()" [style.cursor]="(saving$ | async) ? 'not-allowed' : 'pointer' ">
+    </app-default-button>
+    <mat-spinner *ngIf="saving$ | async" diameter="20" class="float-right m-2">
+    </mat-spinner>
+</div>

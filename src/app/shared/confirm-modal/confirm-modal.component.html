@@ -1,0 +1,14 @@
+<div class="d-flex flex-column align-items-center p-3">
+  <p class="d-flex justify-content-center">
+    <mat-icon [ngStyle]="{ color: data?.color }" class="me-2">{{ data?.icon }}</mat-icon>
+    {{ data?.message }}
+  </p>
+  <div class="confirm-button-group">
+    <button (click)="cancelAction()" class="m-1" mat-raised-button>
+      {{ data?.cancel ? data?.cancel : "Cancel" }}
+    </button>
+    <button (click)="doAction()" class="m-1" mat-raised-button color="warn">
+      {{ "Confirm" | titlecase }}
+    </button>
+  </div>
+</div>

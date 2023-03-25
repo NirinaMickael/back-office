@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+}
+
+.table-container {
+    width: 96%;
+    margin-left: 1%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 30%;
+    margin-left: 1%;
+}
+
+.demo-button {
+    float: right;
+    margin-left: 69%;
+}
+
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-group {
+    overflow-x: auto;
+    margin-bottom: 40px;
+}
+.card-group h4 {
+    width: -webkit-fill-available;
+}
+.card-element {
+    display: inline-flex;
+}

@@ -1,0 +1,29 @@
+<mat-card class="card-element p-3 my-1">
+  <div class="overlay"></div>
+  <div class="action-btn">
+    <button
+      (click)="edit()"
+      mat-mini-fab
+      class="me-1 icon-btn icon-btn-edit"
+      aria-label="Edit"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      (click)="delete()"
+      mat-mini-fab
+      class="ms-1 icon-btn icon-btn-delete"
+      aria-label="Delete"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <mat-card-title class="mb-2">{{ faq?.question }}</mat-card-title>
+
+  <mat-card-content class="h-90 content">
+    <perfect-scrollbar>
+      <p>{{ faq?.answer }}</p>
+    </perfect-scrollbar>
+  </mat-card-content>
+</mat-card>

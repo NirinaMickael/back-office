@@ -1,0 +1,22 @@
+<div class="container-fluid d-flex h-100 justify-content-between align-items-center w-100">
+  <div class="d-flex flex-column mr-5 logo justify-content-center">
+    <img src="assets/img/logo.png" class="logo"/>
+  </div>
+
+  <div class="user-identity">
+    <!-- <button mat-button color="primary" (click)="setLocalToParis()">Change to Paris timezone</button> -->
+    <button mat-button [matMenuTriggerFor]="menu" aria-label="Menu" class="menu-user">
+      <div class="d-flex flex-row-reverse">
+        <div class="arrow_down"><mat-icon role="img" aria-hidden="true">arrow_drop_down</mat-icon></div>
+        <div *ngIf="displayIdentity$ | async; let displayName"><ngx-avatar name="{{myName}}" size="30"></ngx-avatar></div>
+      </div>
+    </button>
+    <mat-menu  #menu="matMenu" xPosition="before">
+      <button mat-menu-item  (click)="openDialog()"><mat-icon class="submenu-icon">person</mat-icon><span>{{ myName }}</span></button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="requestLogout()">
+        <mat-icon class="submenu-icon">logout</mat-icon><span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

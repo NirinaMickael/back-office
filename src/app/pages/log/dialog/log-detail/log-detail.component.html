@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Log detail</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-4"><h3>Email:</h3></div>
+        <div class="col-8"><h3>{{ data.detail.email }}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col-4"><h3>Domain:</h3></div>
+        <div class="col-8"><h3>{{ data.detail.domain }}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col-4"><h3>Action:</h3></div>
+        <div class="col-8"><span  class="badge rounded-pill" [ngClass]="{'bg-success': data.detail.action == 'create', 'bg-warning': data.detail.action == 'update', 'bg-danger': data.detail.action == 'delete'}">{{ data.detail.action }}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-4"><h3>Success:</h3></div>
+        <div class="col-8">
+            <h3>
+                <mat-icon matSuffix *ngIf="data.detail.success" color="primary" [matTooltip]="data.detail.success">done</mat-icon>
+                <mat-icon matSuffix *ngIf="!data.detail.success" color="warn" [matTooltip]="data.detail.success">clear</mat-icon>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4"><h3>Latest:</h3></div>
+        <div class="col-8"><h3><ngx-json-viewer [json]="latest"></ngx-json-viewer></h3></div>
+    </div>
+    <div class="row">
+        <div class="col-4"><h3>New:</h3></div>
+        <div class="col-8"><h3><ngx-json-viewer [json]="next"></ngx-json-viewer></h3></div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

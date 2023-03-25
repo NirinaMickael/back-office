@@ -1,0 +1,305 @@
+<h1>Section Manager</h1>
+<p>*click to see details</p>
+<p>*double click to edit</p>
+
+<div class="section-manager-header">
+  <button mat-raised-button (click)="add()">Add new Section</button>
+</div>
+
+<mat-card class="card-section" *ngFor="let section of sections; let i = index">
+  <div class="section-manager-header" style="margin-bottom: 0.2em">
+    <mat-icon class="delete-btn" (click)="delete(section)" *ngIf="section._id"
+      >delete</mat-icon
+    >
+  </div>
+  <div class="card-header">
+    <div style="display: block">
+      <h2
+        (dblclick)="doubleClick(section._id, 'number')"
+        [style.display]="
+          editMode?.id == section._id && editMode?.field == 'number'
+            ? 'none'
+            : 'block'
+        "
+      >
+        {{ section.number }}
+      </h2>
+      <input
+        *ngIf="editMode?.id == section._id && editMode?.field == 'number'"
+        (keyup.enter)="edit(section)"
+        [(ngModel)]="section.number"
+        [ngModelOptions]="{ standalone: true }"
+        class="section-input"
+        type="text"
+        placeholder="section number"
+      />
+      <p
+        (dblclick)="doubleClick(section._id, 'title')"
+        [style.display]="
+          editMode?.id == section._id && editMode?.field == 'title'
+            ? 'none'
+            : 'block'
+        "
+      >
+        {{ section.title }}
+      </p>
+      <input
+        *ngIf="editMode?.id == section._id && editMode?.field == 'title'"
+        (keyup.enter)="edit(section)"
+        [(ngModel)]="section.title"
+        [ngModelOptions]="{ standalone: true }"
+        class="section-input"
+        type="text"
+        placeholder="section title"
+      />
+    </div>
+    <img
+      *ngIf="section?.image"
+      [src]="serverPublicPath + '/' + section.image"
+      alt=""
+      (dblclick)="doubleClick(section._id, 'image')"
+      [style.display]="
+        editMode?.id == section._id && editMode?.field == 'image'
+          ? 'none'
+          : 'block'
+      "
+    />
+    <button
+      mat-raised-button
+      *ngIf="section && !section.image"
+      (click)="doubleClick(section._id, 'image')"
+    >
+      Add Image
+    </button>
+    <div
+      *ngIf="editMode?.id == section._id && editMode?.field == 'image'"
+      style="width: 100%; max-width: 20em"
+    >
+      <app-upload-file
+        (uploadEvent)="onUploadImage($event, section, section)"
+        [fileTypes]="'image'"
+      ></app-upload-file>
+    </div>
+  </div>
+  <div class="card-body">
+    <div style="display: block">
+      <ul>
+        <li
+          *ngFor="let content of section.contents; let it = index"
+          (click)="selectContent(i, content)"
+          (dblclick)="doubleClick(content._id, 'title')"
+          [style.color]="
+            selectedContent &&
+            selectedContent.index == i &&
+            content._id == selectedContent?.content._id
+              ? '#3f51b5'
+              : black
+          "
+        >
+          {{
+            editMode?.id == content._id && editMode?.field == "title"
+              ? ""
+              : content.title
+          }}
+          <input
+            *ngIf="editMode?.id == content._id && editMode?.field == 'title'"
+            (keyup.enter)="edit(section)"
+            [(ngModel)]="content.title"
+            [ngModelOptions]="{ standalone: true }"
+            class="section-input"
+            type="text"
+            placeholder="content title"
+          />
+        </li>
+      </ul>
+      <div class="add-button">
+        <button mat-mini-fab (click)="clickAdd('content', section)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="selectedContent?.content && selectedContent?.index == i">
+        <img
+          *ngIf="selectedContent?.content?.image && selectedContent?.index == i"
+          [src]="serverPublicPath + '/' + selectedContent?.content?.image"
+          alt=""
+          (dblclick)="doubleClick(selectedContent?.content?._id, 'image')"
+          [style.display]="
+            editMode?.id == selectedContent?.content?._id &&
+            editMode?.field == 'image'
+              ? 'none'
+              : 'block'
+          "
+        />
+        <button
+          mat-raised-button
+          *ngIf="selectedContent && !selectedContent?.content?.image"
+          (click)="doubleClick(selectedContent?.content?._id, 'image')"
+        >
+          Add Image
+        </button>
+        <div
+          *ngIf="
+            editMode?.id == selectedContent?.content?._id &&
+            editMode?.field == 'image'
+          "
+          style="width: 100%; max-width: 20em"
+        >
+          <app-upload-file
+            (uploadEvent)="
+              onUploadImage($event, selectedContent?.content, section)
+            "
+            [fileTypes]="'image'"
+          ></app-upload-file>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedContent?.content && selectedContent?.index == i">
+      <ul>
+        <li
+          *ngFor="
+            let subContent of selectedContent?.content?.subtitles;
+            let iter = index
+          "
+          (click)="selectSubContent(i, it, subContent)"
+          (dblclick)="doubleClick(subContent._id, 'title')"
+          [style.color]="
+            subContent._id == selectedSubContent?.subContent?._id
+              ? '#3f51b5'
+              : black
+          "
+        >
+          {{
+            editMode?.id == subContent._id && editMode?.field == "title"
+              ? ""
+              : subContent.title
+          }}
+          <input
+            *ngIf="editMode?.id == subContent._id && editMode?.field == 'title'"
+            (keyup.enter)="edit(section)"
+            [(ngModel)]="subContent.title"
+            [ngModelOptions]="{ standalone: true }"
+            class="section-input"
+            type="text"
+            placeholder="Sub-content title"
+          />
+        </li>
+      </ul>
+      <div class="add-button">
+        <button
+          mat-mini-fab
+          (click)="clickAdd('subContent', selectedContent?.content)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="
+        selectedSubContent?.subContent &&
+        selectedSubContent?.index == i &&
+        selectedSubContent.index2 == it
+      "
+    >
+      <div
+        *ngIf="selectedSubContent?.subContent?.description"
+        (dblclick)="
+          doubleClick(selectedSubContent?.subContent?._id, 'description')
+        "
+        [style.display]="
+          editMode?.id == selectedSubContent?.subContent?._id &&
+          editMode?.field == 'description'
+            ? 'none'
+            : 'block'
+        "
+        [innerHTML]="selectedSubContent?.subContent?.description"
+      ></div>
+      <button
+        mat-raised-button
+        *ngIf="
+          selectedSubContent?.subContent &&
+          !selectedSubContent?.subContent?.description
+        "
+        (click)="
+          doubleClick(selectedSubContent?.subContent?._id, 'description')
+        "
+        style="height: 3em"
+      >
+        Add Description
+      </button>
+      <angular-editor
+        *ngIf="
+          editMode?.id == selectedSubContent?.subContent?._id &&
+          editMode?.field == 'description'
+        "
+        [placeholder]="'Enter text here...'"
+        [(ngModel)]="selectedSubContent.subContent.description"
+        [ngModelOptions]="{ standalone: true }"
+        [config]="editorConfig"
+      ></angular-editor>
+      <button
+        *ngIf="
+          editMode?.id == selectedSubContent?.subContent?._id &&
+          editMode?.field == 'description'
+        "
+        mat-raised-button
+        (click)="edit(section)"
+      >
+        Finish
+      </button>
+    </div>
+
+    <div
+      *ngIf="
+        selectedSubContent?.subContent &&
+        selectedSubContent?.index == i &&
+        selectedSubContent.index2 == it
+      "
+      style="display: flex; justify-content: end"
+    >
+      <img
+        *ngIf="
+          selectedSubContent?.subContent?.image &&
+          selectedSubContent?.index == i &&
+          selectedSubContent.index2 == it
+        "
+        [src]="serverPublicPath + '/' + selectedSubContent?.subContent?.image"
+        alt=""
+        (dblclick)="doubleClick(selectedSubContent?.subContent?._id, 'image')"
+        [style.display]="
+          editMode?.id == selectedSubContent?.subContent?._id &&
+          editMode?.field == 'image'
+            ? 'none'
+            : 'block'
+        "
+      />
+      <button
+        mat-raised-button
+        *ngIf="
+          selectedSubContent?.subContent &&
+          !selectedSubContent?.subContent?.image &&
+          !editMode
+        "
+        (click)="doubleClick(selectedSubContent?.subContent?._id, 'image')"
+        style="height: 3em"
+      >
+        Add Image
+      </button>
+
+      <div
+        *ngIf="
+          editMode?.id == selectedSubContent?.subContent?._id &&
+          editMode?.field == 'image'
+        "
+        style="width: 100%; max-width: 20em"
+      >
+        <app-upload-file
+          (uploadEvent)="
+            onUploadImage($event, selectedSubContent.subContent, section)
+          "
+          [fileTypes]="'image'"
+        ></app-upload-file>
+      </div>
+    </div>
+  </div>
+</mat-card>

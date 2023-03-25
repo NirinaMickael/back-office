@@ -1,0 +1,121 @@
+<h1>Reporting</h1>
+
+<br>
+
+<!-- TAB -->
+<nav mat-tab-nav-bar [backgroundColor]="background">
+    <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link" [active]="activeLink == link"> {{link}} </a>
+</nav>
+
+<div *ngIf="scores">
+    <div *ngIf="activeLink=='Leaderboard'">
+        <app-leaderboard [data]="leaderboard" [hideTime]="true"></app-leaderboard>
+    </div>
+
+    <div *ngIf="activeLink=='Leaderboard Details'">
+        <div style="display: flex; justify-content: space-between;">
+            <div class="reporting-box">
+                <h5>Registered Users</h5>
+                <p>{{ users?.length }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Highest score</h5>
+                <p>{{ scores[0]?.total }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average score</h5>
+                <p>{{ avg }}</p>
+            </div>
+        </div>
+
+        <app-all-ranking [scores]="scores"></app-all-ranking>
+    </div>
+
+    <div *ngIf="activeLink=='Game 1'">
+        <div style="display: flex; justify-content: space-between;">
+            <div class="reporting-box">
+                <h5>Players</h5>
+                <p>{{ game1_details.scores?.length }}/{{ users?.length }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Highest score</h5>
+                <p>{{ game1_details?.scores[0]?.score }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average score</h5>
+                <p>{{ game1_details?.avg }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average time (s)</h5>
+                <p>{{ game1_details?.avg_time }}</p>
+            </div>
+        </div>
+        <app-leaderboard [data]="game1_details.scores"></app-leaderboard>
+    </div>
+
+    <div *ngIf="activeLink=='Game 2'">
+        <div style="display: flex; justify-content: space-between;">
+            <div class="reporting-box">
+                <h5>Players</h5>
+                <p>{{ game2_details?.scores?.length }}/{{ users?.length }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Highest score</h5>
+                <p>{{ game2_details?.scores[0]?.score }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average score</h5>
+                <p>{{ game2_details?.avg }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average time (s)</h5>
+                <p>{{ game2_details?.avg_time }}</p>
+            </div>
+        </div>
+        <app-leaderboard [data]="game2_details?.scores"></app-leaderboard>
+    </div>
+
+    <div *ngIf="activeLink=='Game 3'">
+        <div style="display: flex; justify-content: space-between;">
+            <div class="reporting-box">
+                <h5>Players</h5>
+                <p>{{ game3_details?.scores?.length }}/{{ users?.length }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Highest score</h5>
+                <p>{{ game3_details?.scores[0]?.score }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average score</h5>
+                <p>{{ game3_details?.avg }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average time (s)</h5>
+                <p>{{ game3_details?.avg_time }}</p>
+            </div>
+        </div>
+        <app-leaderboard [data]="game3_details?.scores"></app-leaderboard>
+    </div>
+
+    <div *ngIf="activeLink=='Game 4'">
+        <div style="display: flex; justify-content: space-between;">
+            <div class="reporting-box">
+                <h5>Players</h5>
+                <p>{{ game4_details?.scores?.length }}/{{ users?.length }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Highest score</h5>
+                <p>{{ game4_details?.scores[0]?.score }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average score</h5>
+                <p>{{ game4_details?.avg }}</p>
+            </div>
+            <div class="reporting-box">
+                <h5>Average time (s)</h5>
+                <p>{{ game4_details?.avg_time }}</p>
+            </div>
+        </div>
+        <app-leaderboard [data]="game4_details?.scores"></app-leaderboard>
+    </div>
+</div>

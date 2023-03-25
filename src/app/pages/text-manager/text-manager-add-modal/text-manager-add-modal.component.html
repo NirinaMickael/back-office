@@ -1,0 +1,60 @@
+<div style="width: 400px">
+  <h1>Add a text</h1>
+  <form [formGroup]="TextAddForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+      <mat-label>Page*: </mat-label>
+      <input
+        type="text"
+        placeholder="Page"
+        aria-label="Page"
+        matInput
+        formControlName="page"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let item of pages" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-autocomplete>
+
+      <mat-error
+        *ngIf="
+          TextAddForm.get('page').touched &&
+          TextAddForm.get('page').hasError('required')
+        "
+      >
+        Please select a page
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+    <br />
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+      <mat-label>title</mat-label>
+      <input matInput formControlName="title" />
+      <!-- <mat-error *ngIf="TextAddForm.get('title').invalid"></mat-error> -->
+    </mat-form-field>
+    <br />
+    <br />
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+      <mat-label>subtitle</mat-label>
+      <input matInput formControlName="subtitle" />
+    </mat-form-field>
+    <br />
+    <br />
+    <button
+      [disabled]="(isSaving$ | async) || invalid"
+      mat-raised-button
+      color="primary"
+      style="float: right"
+    >
+      Insert
+      <mat-spinner
+        *ngIf="isSaving$ | async"
+        diameter="20"
+        class="float-right m-2"
+      >
+      </mat-spinner>
+    </button>
+  </form>
+</div>

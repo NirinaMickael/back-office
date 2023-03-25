@@ -1,0 +1,39 @@
+table {
+  width: 100%;
+}
+
+.table-container {
+  width: 96%;
+  margin-left: 1%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 30%;
+  margin-left: 1%;
+}
+
+.demo-button {
+  float: right;
+  margin-right: 3%;
+}
+
+.container-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.item {
+  text-align: center;
+  transition: 0.5s;
+}
+
+.item:hover {
+  transform: scale(1.02);
+}

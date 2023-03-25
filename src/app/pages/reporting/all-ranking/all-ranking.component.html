@@ -1,0 +1,101 @@
+<table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> Rank </th>
+        <td mat-cell *matCellDef="let element; let i = dataIndex;">{{i+1}} </td>
+    </ng-container> 
+
+    <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
+        <td mat-cell *matCellDef="let element"> {{ element.user }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="game1">
+        <th mat-header-cell *matHeaderCellDef> Game 1 </th>
+        <td mat-cell *matCellDef="let element">
+            <p style="margin-top: .5em;"><b>score: </b>{{ element.game_1?.score }}</p>
+            <p><b>time: </b>{{ element.game_1?.time }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="game2">
+        <th mat-header-cell *matHeaderCellDef> Game 2 </th>
+        <td mat-cell *matCellDef="let element">
+            <p><b>score: </b>{{ element.game_2?.score }}</p>
+            <p><b>time: </b>{{ element.game_2?.time }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="game3">
+        <th mat-header-cell *matHeaderCellDef> Game 3 </th>
+        <td mat-cell *matCellDef="let element">
+            <p><b>score: </b>{{ element.game_3?.score }}</p>
+            <p><b>time: </b>{{ element.game_3?.time }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="game4">
+        <th mat-header-cell *matHeaderCellDef> Game 4 </th>
+        <td mat-cell *matCellDef="let element">
+            <p><b>score: </b>{{ element.game_4?.score }}</p>
+            <p><b>time: </b>{{ element.game_4?.time }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+        <td mat-cell *matCellDef="let element"> {{ element.total }} </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+            <!-- <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"> -->
+            <div class="example-element-detail" [@detailExpand]="'expanded'" style="margin-left: 7%;">
+                <div class="example-element-description">
+
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Game 3 score details
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="games-details">
+                                <p *ngFor="let item of element.game_3?.score_details" class="games-details-item">
+                                    <b>Candidate {{ item.index }}: </b> {{
+                                    item.score }}
+                                </p>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <br>
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Game 4 score details
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="games-details">
+                                <p *ngFor="let item of element.game_4?.score_details" class="games-details-item">
+                                    <b>Answer {{ item.index }}: </b> {{
+                                    item.score }}
+                                </p>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
+</table>
+<mat-paginator class="sticky-paginator" [pageSize]="10" [pageSizeOptions]="[10, 30, 50, 100]">
+</mat-paginator>

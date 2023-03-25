@@ -1,0 +1,55 @@
+<div style="width: 60vw; max-height: 90vh; overflow-x: hidden;">
+    <h1>
+        Add/Edit subtitle 
+        <mat-spinner *ngIf="deleting" diameter="20" class="float-right m-2"></mat-spinner>
+    </h1>
+    <p>* : required</p>
+    <p style="display: flex; align-content: center;">
+        <mat-icon class="me-3 submenu-icon">info</mat-icon>file size must be less than 150MB
+    </p>
+    <br>
+
+    <mat-accordion>
+        <mat-expansion-panel style="margin-bottom: 3em;">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Add new subtitle
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <form [formGroup]="form">
+                <div style="display: flex; margin-top: 0.5em;">
+                    <mat-form-field appearance="fill" class="mat-form-field-fill" style="width: 20%;">
+                        <mat-label>Language*: </mat-label>
+                        <input matInput formControlName="language" (keyup)="renameFile()" max="2" placeholder="EN" />
+                    </mat-form-field>
+
+                    <div style="position: relative; width: 80%;">
+                        <app-upload-file (uploadEvent)="onSubmitAdd($event)" [fileTypes]="'subtitle'" [filename]="filename">
+                        </app-upload-file>
+                    </div>
+                </div>
+            </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngFor="let item of data?.subtitles; let i = index;" style="margin-bottom: .4em;">
+            <mat-expansion-panel-header (click)="edit(item)">
+                <mat-panel-title>
+                    {{ item.language }}
+                </mat-panel-title>
+                <mat-panel-description style="display: flex; justify-content: space-between;">
+                    <p>{{ item.filename }}</p>
+                    <button mat-icon-button color="warn" *ngIf="item.filePath && !deleting" aria-label="delete"
+                        (click)="delete(item)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <form [formGroup]="form" *ngIf="!deleting">
+                <app-upload-file (uploadEvent)="onSubmitEdit($event)" [fileTypes]="'subtitle'" [filename]="filename">
+                </app-upload-file>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

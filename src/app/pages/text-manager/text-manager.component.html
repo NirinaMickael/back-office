@@ -1,0 +1,57 @@
+<div class="d-flex align-items-center">
+    <h1 class="m-1">Text Manager</h1>
+    <mat-spinner class="ms-2" color="primary" *ngIf="saving$ | async" diameter="20"></mat-spinner>
+  </div>
+  <mat-form-field class="search-input">
+      <mat-label>Search</mat-label>
+      <mat-icon matSuffix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+
+<button mat-raised-button color="primary" class="demo-button" (click)="add()">
+    Add Text
+</button>
+<br>
+<div class="table-container d-flex flex-column justify-content-between mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="page">
+            <th mat-header-cell *matHeaderCellDef> Page </th>
+            <td mat-cell *matCellDef="let element"> {{element.page}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subtitle">
+            <th mat-header-cell *matHeaderCellDef> Subtitle </th>
+            <td mat-cell *matCellDef="let element"> {{element.subtitle}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> Created At </th>
+            <td mat-cell *matCellDef="let element"> {{ element.createdAt | date | date:'MM/dd/y' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" aria-label="edit" (click)="edit(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- <button mat-icon-button color="warn" aria-label="delete" (click)="delete(element)">
+                    <mat-icon>delete</mat-icon>
+                </button> -->
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- <mat-paginator class="sticky-paginator" [pageSize]="10" [pageSizeOptions]="[10, 30, 50, 100]">
+    </mat-paginator> -->
+</div>

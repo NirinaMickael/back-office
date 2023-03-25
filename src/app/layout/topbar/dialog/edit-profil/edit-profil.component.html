@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Edit my profil</h2>
+<form [formGroup]="EditMyProfilForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" value="{{data.name}}"/>
+        <mat-error *ngIf="EditMyProfilForm.get('name').invalid"> {{ getErrorMessage() }} </mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+        <mat-label>email</mat-label>
+        <input matInput formControlName="email" value="{{data.email}}"/>
+        <mat-error *ngIf="EditMyProfilForm.get('email').invalid"> {{ getErrorMessage() }} </mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+        <mat-label>Current Password</mat-label>
+        <input matInput formControlName="currentpassword" type="password"/>
+        <mat-error *ngIf="EditMyProfilForm.get('currentpassword').invalid"> {{ getErrorMessage() }} </mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+    <mat-form-field appearance="fill" class="mat-form-field-fill">
+        <mat-label>New Password</mat-label>
+        <input matInput formControlName="password" type="password"/>
+        
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label> Role :</mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="admin" selected="data.role == 'admin'">Admin</mat-option>
+            <mat-option value="artist" selected="data.role == 'artist'">Visitor</mat-option>
+        </mat-select>
+        <mat-error *ngIf="EditMyProfilForm.get('role').invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <br />
+    <br />
+    <button type="submit" mat-raised-button color="primary" style="float: right" *ngIf="!loading">
+        Save
+    </button>
+    <mat-spinner *ngIf="loading" diameter="20" class="float-right m-2"></mat-spinner>
+</form>

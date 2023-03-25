@@ -1,0 +1,35 @@
+<div class="d-flex align-items-center">
+    <h1 class="m-1">Timer Manager</h1>
+    <mat-spinner class="ms-2" color="primary" *ngIf="saving$ | async" diameter="20"></mat-spinner>
+</div>
+<p style="display: flex; align-content: center;">
+    <mat-icon class="me-3 submenu-icon">info</mat-icon>click on the card to edit the timer
+</p>
+<br>
+<mat-form-field class="search-input">
+    <mat-label>Search</mat-label>
+    <mat-icon matSuffix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($event)" #input>
+</mat-form-field>
+
+<button mat-raised-button color="primary" class="demo-button" (click)="add()">
+    Add Timer
+</button>
+<br>
+
+<div class="container-grid">
+    <div class="item" *ngFor="let item of texts">
+        <mat-card (click)="edit(item)" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+                <h3>{{ item.page }}</h3>
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+                <mat-icon class="me-3 submenu-icon">timer</mat-icon>
+                <p style="margin: auto 0px;">{{ item.timeFormatted }}</p>
+                <p *ngIf="item.isIntro" style="margin: auto 0px;">&nbsp; &nbsp; Time before transition: {{ item.timeBeforeTransition }}s</p>
+            </div>
+
+        </mat-card>
+    </div>
+</div>
