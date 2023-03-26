@@ -7,7 +7,7 @@
     <!-- <h1 class="m-3"></h1> -->
     <form [formGroup]="CategoryAddForm" (ngSubmit)="onSubmit()">
       <div class="d-flex justify-content-between">
-        <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+        <mat-form-field appearance="fill" class="mat-form-field-fill px-2 w-100">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" />
           <mat-error *ngIf="CategoryAddForm.get('name').errors">{{
@@ -18,7 +18,7 @@
   
       <div class="d-flex justify-content-between">
        <!-- category -->
-        <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+        <mat-form-field appearance="fill" class="mat-form-field-fill px-2 w-100">
           <mat-label>Description</mat-label>
           <input matInput formControlName="description"/>
           <mat-error *ngIf="CategoryAddForm.get('description').invalid">{{
