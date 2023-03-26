@@ -42,6 +42,11 @@ export class SidebarComponent implements OnInit {
       icon: 'confirmation_number',
       path: 'statistics'
     },
+    {
+      name:'Help',
+      icon:'help_outline',
+      path:'help'
+    },
     // {
     //   name: 'Slider Manager',
     //   icon: 'input',

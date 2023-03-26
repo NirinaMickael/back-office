@@ -51,6 +51,10 @@ const routes: Routes = [
         path: 'statistics',
         loadChildren: ()=> import('./statistics/statistics.module').then(m=> m.StatisticsModule)
       },
+      {
+        path: 'help',
+        loadChildren: ()=> import('./help/help.module').then(m=> m.HelpModule)
+      },
       // {
       //   path: 'text-manager',
       //   loadChildren: () =>
