@@ -1,11 +1,10 @@
 @import "../../../assets/css/variables.scss";
 @mixin menu {
   background-color: $blackOpacity;
-  color: $black;
-  padding: 0.7em 0.7em;
+  color: white;
   border-radius: 5px;
   .submenu-icon {
-    color: $black !important;
+    color: white !important;
   }
 }
 

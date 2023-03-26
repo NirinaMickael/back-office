@@ -5,9 +5,16 @@
     <div class="d-flex justify-content-between">
       <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
+        <input matInput formControlName="name" >
         <mat-error *ngIf="OeuvreEditForm.get('name').errors">{{
           getErrorMessage("name")
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+        <mat-label>objectName</mat-label>
+        <input matInput formControlName="objectName" >
+        <mat-error *ngIf="OeuvreEditForm.get('objectName').errors">{{
+          getErrorMessage("objectName")
         }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" class="mat-form-field-fill px-2 col-4" *ngIf="category">

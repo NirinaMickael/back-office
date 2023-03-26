@@ -30,11 +30,12 @@ export class OeuvreAddModalComponent {
   category$ : Observable<CategoryEntry[]>;
   allArtist$ !:Observable<ArtistEntry[]> ;
   constructor(protected store: Store, private dialogRef: MatDialogRef<OeuvreAddModalComponent> , private formBuilder : FormBuilder) {
-    this.store.dispatch(CategoryAction.categoryLoadRequested());
+    // this.store.dispatch(CategoryAction.categoryLoadRequested());
     this.OeuvreAddForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       category: ['',[Validators.required]],
       description : ["",Validators.required],
+      objectName:['',Validators.required],
       price : [0,[Validators.required]],
       image : [''],
   });
@@ -76,8 +77,13 @@ export class OeuvreAddModalComponent {
   }
   onSubmit(): void {
     console.log(this.OeuvreAddForm.value);
-    
     if (this.OeuvreAddForm.invalid) return;
+
+    // const newForm = {
+    //   ...this.OeuvreAddForm.value,
+    //   price: parseFloat(this.OeuvreAddForm.value["price"])
+    // }
+    console.log(this.OeuvreAddForm.get("price").value)
 
     this.store.dispatch(oeuvreAction.oeuvreSaveRequested({
       input: this.OeuvreAddForm.value

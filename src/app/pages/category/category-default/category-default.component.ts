@@ -27,6 +27,7 @@ export class CategoryDefaultComponent {
   displayedColumnAdmin : string[] = [
     'name',
     'description',
+    'createdAt',
     'actions',
   ];
 

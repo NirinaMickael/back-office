@@ -38,6 +38,7 @@ export class OeuvreEditModalComponent implements OnInit{
       catergoryId : [data.categoryId,[Validators.required]],
       description  : [data.description],
       price : [data.price,[Validators.required]],
+      objectName:[data.objectName,[Validators.required]],
       image : [''],
   });
   this.modeselect = data.name;
@@ -97,16 +98,19 @@ export class OeuvreEditModalComponent implements OnInit{
   }
   onUploadFile(e: Event){
     const file  = e as any;
+    console.log(file)
     this.OeuvreEditForm.controls['image'].setValue(file[0].location);
     this.isUploaded = true;
   } 
   getErrorMessage(champ:string): any {
     return this.OeuvreEditForm.get(champ).hasError('required') ?`the ${champ}  is required` : "error";
   }
+  /*
   onUploadFiles(e:Event){
     let  file  = e as any;
-    file = file.map((e:any)=>e.location)
+    // file = file.map((e:any)=>e.location)
     this.OeuvreEditForm.controls['images'].setValue(file);
     this.isUploadedImage = true;
   }
+  */
 }

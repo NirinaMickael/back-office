@@ -43,6 +43,18 @@ const routes: Routes = [
         loadChildren: () =>
           import('./video-manager/video-manager.module').then((m) => m.VideoManagerModule),
       },
+      {
+        path: 'order',
+        loadChildren: ()=> import('./order/order.module').then(m=> m.OrderModule)
+      },
+      {
+        path: 'statistics',
+        loadChildren: ()=> import('./statistics/statistics.module').then(m=> m.StatisticsModule)
+      },
+      {
+        path: 'help',
+        loadChildren: ()=> import('./help/help.module').then(m=> m.HelpModule)
+      },
       // {
       //   path: 'text-manager',
       //   loadChildren: () =>

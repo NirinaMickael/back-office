@@ -33,6 +33,7 @@ export class OeuvreDefaultComponent implements OnInit{
     'name',
     'category',
     'description',
+    'objectName',
     'price',
     'image',
     'actions',

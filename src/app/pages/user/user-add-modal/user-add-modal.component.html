@@ -1,15 +1,18 @@
 <div class="card p-4">
-    <h1>Add an user</h1>
+    <div class="d-flex justify-content-between">
+        <h1>Add an user</h1>
+        <img src="assets/img/logo.png" width="80px" height="auto" alt="logo">
+    </div>
     <form [formGroup]="UserAddForm" (ngSubmit)="onSubmit()">
-        <div class="d-flex">
-            <mat-form-field appearance="fill" class="mat-form-field-fill px-2">
+        <div>
+            <mat-form-field appearance="fill" class="mat-form-field-fill w-100 px-2">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
                 <mat-error *ngIf="UserAddForm.get('email').touched && UserAddForm.get('name').hasError('required')">
                     Please enter a name
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="px-2">
+            <mat-form-field class="px-2 w-100">
                 <mat-label> Role :</mat-label>
                 <mat-select formControlName="role">
                     <mat-option value="admin">Admin</mat-option>
@@ -25,7 +28,7 @@
             <mat-error *ngIf="UserAddForm.get('email').invalid">{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
         <div class="w-100 my-2" >
-            <button [disabled]="(isSaving$ | async) || invalid" mat-raised-button color="primary" style="float: right">
+            <button [disabled]="(isSaving$ | async) || invalid" mat-raised-button color="warn" style="float: right">
                 Insert
                 <mat-spinner *ngIf="isSaving$ | async" diameter="20" class="float-right m-2">
                 </mat-spinner>

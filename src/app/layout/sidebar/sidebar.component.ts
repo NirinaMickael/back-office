@@ -32,6 +32,21 @@ export class SidebarComponent implements OnInit {
       path: '/category',
     },
 
+    {
+      name: 'Order',
+      icon: 'shop',
+      path: 'order'
+    },
+    {
+      name: 'Statistics',
+      icon: 'confirmation_number',
+      path: 'statistics'
+    },
+    {
+      name:'Help',
+      icon:'help_outline',
+      path:'help'
+    },
     // {
     //   name: 'Slider Manager',
     //   icon: 'input',
