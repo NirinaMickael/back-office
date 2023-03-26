@@ -14,6 +14,13 @@
           getErrorMessage("name")
         }}</mat-error>
       </mat-form-field>
+      <mat-form-field appearance="fill" class="mat-form-field-fill w-100 px-2"   >
+        <mat-label>objectName</mat-label>
+        <input matInput formControlName="objectName" />
+        <mat-error *ngIf="OeuvreAddForm.get('objectName').errors">{{
+          getErrorMessage("objectName")
+        }}</mat-error>
+      </mat-form-field>
       <mat-form-field appearance="fill" class="w-100 mat-form-field-fill px-2">
         <mat-label>Price</mat-label>
         <input matInput formControlName="price" />

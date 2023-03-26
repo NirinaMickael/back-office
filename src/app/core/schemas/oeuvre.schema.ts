@@ -15,6 +15,7 @@ export interface OeuvreEntry {
     name : string,
     categoryId : string,
     description: string,
+    objectName:string,
     price:number;
     image :string,
     createdOn: Date;

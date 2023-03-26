@@ -35,6 +35,7 @@ export class OeuvreAddModalComponent {
       name: ['', [Validators.required]],
       category: ['',[Validators.required]],
       description : ["",Validators.required],
+      objectName:['',Validators.required],
       price : [0,[Validators.required]],
       image : [''],
   });
