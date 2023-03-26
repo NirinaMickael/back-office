@@ -97,10 +97,9 @@ export class OeuvreEditModalComponent implements OnInit{
     }
   }
   onUploadFile(e: Event){
-    const file  = e as any;
-    console.log(file)
+    let  file  = e as any;
     this.OeuvreEditForm.controls['image'].setValue(file[0].location);
-    this.isUploaded = true;
+    this.isUploadedImage = true;
   } 
   getErrorMessage(champ:string): any {
     return this.OeuvreEditForm.get(champ).hasError('required') ?`the ${champ}  is required` : "error";
